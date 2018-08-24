@@ -15,6 +15,7 @@ class UsersController < ApplicationController
       redirect_to projects_url
     else
       render 'new'
+      flash[:alert] = "Account Creation failed"
     end
   end
 end

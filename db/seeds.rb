@@ -13,6 +13,13 @@ Project.destroy_all
   )
 end
 
+  User.new(
+    first_name: "tyler",
+    last_name: "palef",
+    email: "tp@yahoo.com",
+    password_digest: "123abc",
+  )
+
 10.times do
   project = Project.create!(
               user: User.all.sample,
