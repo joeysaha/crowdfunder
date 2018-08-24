@@ -15,7 +15,18 @@ class UsersController < ApplicationController
       redirect_to projects_url
     else
       render 'new'
-      flash[:alert] = "Account Creation failed"
+      flash[:alert] = @user.errors.full_messages
     end
   end
+
+  def user_session
+    @user = User.find(session[:user_id])
+  end
+
+  def show
+   @pledges = @user.pledges
+   @projects = @user.projects
+ end
+
+
 end
