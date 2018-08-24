@@ -2,6 +2,14 @@ require 'test_helper'
 
 class ProjectTest < ActiveSupport::TestCase
 
+  def test_valid_project_start_date
+    skip
+  end
+
+  def test_valid_project_end_date
+    skip
+  end
+
   def test_valid_project_can_be_created
     owner = new_user
     owner.save

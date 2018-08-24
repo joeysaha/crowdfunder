@@ -3,6 +3,7 @@ class Pledge < ApplicationRecord
   belongs_to :project
 
   validates :dollar_amount, presence: true
+  validates :dollar_amount, numericality: { only_float: true }
   validates :user, presence: true
   validate :user_cannot_back_own_project
 
