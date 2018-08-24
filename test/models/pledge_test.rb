@@ -14,14 +14,19 @@ class PledgeTest < ActiveSupport::TestCase
   end
 
   def test_owner_cannot_back_own_project
+  # arrange
     owner = new_user
     owner.save
     project = new_project
     project.user = owner
     project.save
+
+  # act
     pledge = Pledge.new(dollar_amount: 3.00, project: project)
     pledge.user = owner
     pledge.save
+
+  # assert
     assert pledge.invalid?, 'Owner should not be able to pledge towards own project'
   end
 
