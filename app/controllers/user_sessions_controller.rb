@@ -9,6 +9,7 @@ class UserSessionsController < ApplicationController
       redirect_to projects_url, notice: "Logged in!"
     else
       render "new"
+      flash[:notice] = "Your login information is invalid"
     end
   end
 

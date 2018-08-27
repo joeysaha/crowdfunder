@@ -13,4 +13,21 @@ class ApplicationController < ActionController::Base
   def not_authenticated
     redirect_to login_path, alert: "Please login first"
   end
+
+  def logged_in?
+    if current_user
+      return true
+    else
+      return false
+    end
+  end
+
+
+  def require_login
+    unless logged_in?
+      flash[:error] = "You must be logged in to access this section"
+      redirect_to login_url # halts request cycle
+    end
+  end
+
 end
