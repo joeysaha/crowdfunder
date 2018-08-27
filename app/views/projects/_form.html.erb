@@ -1,3 +1,19 @@
+<% if @project.errors.any? %>
+  <div class="error_explanation">
+    <h2>
+      <%= pluralize(@project.errors.count, "error") %> prohibited this project from being created:
+    <br>
+    </h2>
+    <ul>
+      <% @project.errors.full_messages.each do |msg| %>
+        <li>
+          <%= msg %>
+        </li>
+        <% end %>
+    </ul>
+  </div>
+  <% end %>
+
 <%= form_for(@project, html: {multipart: true}) do |f| %>
   <div>
     <%= f.label :title %>
