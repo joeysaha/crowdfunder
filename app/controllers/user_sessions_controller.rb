@@ -4,12 +4,13 @@ class UserSessionsController < ApplicationController
   end
 
   def create
-    user = User.find_by(email: params[:session][:email])
-    if user && user.authenticate(params[:session][:password])
+    user = User.find_by(email: params[:email])
+    if user && user.authenticate(params[:password])
       session[:user_id] = user.id
       redirect_to projects_url, notice: "Logged in!"
     else
-      render "black"
+      render "aaaaa"
+      # redirect_to projects_url, notice: "NOT LOGGED IN"
       flash[:notice] = "Your login information is invalid"
     end
   end
