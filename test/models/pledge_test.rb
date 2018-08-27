@@ -13,6 +13,10 @@ class PledgeTest < ActiveSupport::TestCase
     assert pledge.persisted?
   end
 
+  def test_a_pledge_cannot_be_created_without_dollar_amount
+    skip
+  end
+
   def test_owner_cannot_back_own_project
   # arrange
     owner = new_user
