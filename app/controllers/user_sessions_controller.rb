@@ -1,5 +1,6 @@
 class UserSessionsController < ApplicationController
   def new
+    @user = User.new
   end
 
   def create
@@ -8,7 +9,8 @@ class UserSessionsController < ApplicationController
       session[:user_id] = user.id
       redirect_to projects_url, notice: "Logged in!"
     else
-      render "new"
+      render "aaaaa"
+      # redirect_to projects_url, notice: "NOT LOGGED IN"
       flash[:notice] = "Your login information is invalid"
     end
   end

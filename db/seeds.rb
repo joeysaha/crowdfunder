@@ -3,18 +3,19 @@ Reward.destroy_all
 User.destroy_all
 Project.destroy_all
 
-User.new(
+User.create(
   first_name: "Tyler",
   last_name: "Palef",
   email: "tp@yahoo.com",
-  password_digest: "123456789",
+  password: "123456789",
+  password_confirmation: "123456789",
 )
 
-User.new(
+User.create(
   first_name: "Yohan",
   last_name: "Something",
   email: "ys@yahoo.com",
-  password_digest: "123456789",
+  password_digest: "1234567890",
 )
 
 5.times do

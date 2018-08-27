@@ -1,0 +1,46 @@
+THIS IS FOR THE USER SESSION FORM
+
+<!-- <h1>Login</h1>
+
+<%= form_for :session, url: sessions_path do |f| %>
+  <div class="field">
+    <%= f.label :username %>
+    <%= f.text_field :username %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password %>
+    <%= f.password_field :password %>
+  </div>
+
+  <%= f.submit "Login" %>
+<% end %> -->
+
+<!-- <%= form_tag user_sessions_path, :method => :post do %>
+  <div class="field">
+    <%= label_tag :email %><br />
+    <%= text_field_tag :email %>
+  </div>
+  <div class="field">
+    <%= label_tag :password %><br />
+    <%= password_field_tag :password %>
+  </div>
+
+  <div class="actions">
+    <%= submit_tag "Login" %>
+  </div>
+<% end %> -->
+
+<%= form_for url: user_sessions_path do |f| %>
+  <div class="field">
+    <%= f.label :email %>
+    <%= f.text_field :email %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password %>
+    <%= f.password_field :password %>
+  </div>
+
+  <%= f.submit "Login" %>
+<% end %>
