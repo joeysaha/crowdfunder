@@ -3,6 +3,20 @@ Reward.destroy_all
 User.destroy_all
 Project.destroy_all
 
+User.new(
+  first_name: "Tyler",
+  last_name: "Palef",
+  email: "tp@yahoo.com",
+  password_digest: "123456789",
+)
+
+User.new(
+  first_name: "Yohan",
+  last_name: "Something",
+  email: "ys@yahoo.com",
+  password_digest: "123456789",
+)
+
 5.times do
   User.create!(
     first_name: Faker::Name.first_name,
@@ -12,13 +26,6 @@ Project.destroy_all
     password_confirmation: 'password'
   )
 end
-
-  User.new(
-    first_name: "tyler",
-    last_name: "palef",
-    email: "tp@yahoo.com",
-    password_digest: "123abc",
-  )
 
 10.times do
   project = Project.create!(
