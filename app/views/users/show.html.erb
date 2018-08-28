@@ -1,12 +1,39 @@
 <h1>User Profile</h1>
 
 <h3>Projects</h3>
+<div class="">
+  <p>You have <%=@projects.count%> projects.</p>
+</div>
 <% @projects.each do |project| %>
   <%= project.title %> <br>
 <% end %>
+<h4>Started Projects</h4>
+<% @projects.each do |project| %>
+  <% if project.start_date < DateTime.now %>
+    <%= project.title %> <br>
+  <% end %>
+<% end %>
+
+<h4>Funded Projects</h4>
+<% fund = 0 %>
+<% funded_projects = 0 %>
+<% @projects.each do |project| %>
+  <% project.pledges.each do |pledge| %>
+    <% fund += pledge.dollar_amount %>
+    <% funded_projects += 1 %>
+  <% end %>
+<% end %>
+<div class="">
+  This is how much has been pledged. <%= number_to_currency(fund) %> <br>
+  This is how many pledges your projects have. <%= funded_projects %>
+</div>
 <br>
 
 <h3>Pledges</h3>
+<p>You have <%=@pledges.count%> pledges.</p>
+<% pledge_amount = 0 %>
 <% @pledges.each do |pledge| %>
+  <% pledge_amount += pledge.dollar_amount %>
   <%= pledge.project.title %> <br>
 <% end %>
+<p>The amount of money you have pledged is <%= number_to_currency(pledge_amount) %></p>
