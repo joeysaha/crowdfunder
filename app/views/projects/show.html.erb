@@ -9,9 +9,14 @@
 <p>Fundraising starts: <%= @project.start_date.strftime("%A %b %d %Y") %></p>
 <p>Deadline: <%= @project.end_date.strftime("%A %b %d %Y") %></p>
 
+<h2>Pledges</h2>
 <%= form_for [@project, Pledge.new] do |f| %>
   <%= f.number_field :dollar_amount, value: @project.rewards.minimum(:dollar_amount), step: 0.01 %>
   <%= f.submit "Pledge" %>
+<% end %>
+<% @project.pledges.each do |p| %>
+  <p><%= number_to_currency(p.dollar_amount) %></p>
+  <p><%= p.user.first_name %></p>
 <% end %>
 
 <h2>Rewards</h2>
@@ -19,11 +24,15 @@
   <p><%= number_to_currency(reward.dollar_amount) %></p>
   <p><%= reward.description %></p>
 
-  <p>
-    <small>
-      <%= link_to "Remove reward", project_reward_path(@project, reward), method: 'delete' %>
-    </small>
-  </p>
+  <% if current_user == @project.user %>
+    <p>
+      <small>
+        <%= link_to "Remove reward", project_reward_path(@project, reward), method: 'delete' %>
+      </small>
+    </p>
+  <% end %>
 <% end %>
 
-<%= link_to "Add new reward", new_project_reward_path(@project) %>
+<% if current_user == @project.user %>
+  <%= link_to "Add new reward", new_project_reward_path(@project) %>
+<% end %>
