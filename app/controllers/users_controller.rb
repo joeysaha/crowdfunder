@@ -31,9 +31,9 @@ class UsersController < ApplicationController
   end
 
   def show
-   @pledges = @user.pledges
-   @projects = @user.projects
- end
+    @pledges = current_user.pledges
+    @projects = current_user.projects
+  end
 
 
 end

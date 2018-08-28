@@ -1,0 +1,12 @@
+<h1>User Profile</h1>
+
+<h3>Projects</h3>
+<% @projects.each do |project| %>
+  <%= project.title %> <br>
+<% end %>
+<br>
+
+<h3>Pledges</h3>
+<% @pledges.each do |pledge| %>
+  <%= pledge.project.title %> <br>
+<% end %>
