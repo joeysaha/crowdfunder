@@ -1,3 +1,20 @@
+<% if @reward.errors.any? %>
+  <div class="error_explanation">
+    <h2>
+      <%= pluralize(@reward.errors.count, "error") %> prohibited this project from being created:
+    <br>
+    </h2>
+    <ul>
+      <% @reward.errors.full_messages.each do |msg| %>
+        <li>
+          <%= msg %>
+        </li>
+        <% end %>
+    </ul>
+  </div>
+  <% end %>
+
+
 <h1>Add a reward for <%= @project.title %></h1>
 
 <%= form_for [@project, @reward] do |f| %>
