@@ -47,8 +47,10 @@
 <% @pledges.each do |pledge| %>
   <br>
   <% pledge_amount += pledge.dollar_amount %>
-  <%= pledge.project.title %>:
-  <%= number_to_currency(pledge.dollar_amount) %>
+  <%= link_to "#{pledge.project.title}", project_path(pledge.project.id) %> |
+  <%= number_to_currency(pledge.dollar_amount) %> |
+  <%= link_to "#{pledge.project.user.first_name} #{pledge.project.user.last_name}", bio_path(pledge.project.user.id) %>
 <% end %>
+
 <p>The amount of money you have pledged is <%= number_to_currency(pledge_amount) %></p>
 <hr>

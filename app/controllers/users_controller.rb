@@ -35,5 +35,9 @@ class UsersController < ApplicationController
     @projects = current_user.projects
   end
 
+  def bio
+    @user = User.find(params[:id])
+    @projects = Project.where(params[:project_id])
+  end
 
 end
