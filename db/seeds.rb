@@ -15,7 +15,8 @@ User.create(
   first_name: "Yohan",
   last_name: "Something",
   email: "ys@yahoo.com",
-  password_digest: "1234567890",
+  password: "1234567890",
+  password_confirmation: "1234567890",
 )
 
 5.times do
@@ -34,14 +35,14 @@ end
               title: Faker::App.name,
               description: Faker::Lorem.paragraph,
               goal: rand(100000),
-              start_date: Time.now.utc - rand(60).days,
-              end_date: Time.now.utc + rand(10).days
+              start_date: Time.now.utc + rand(60).days,
+              end_date: Time.now.utc + rand(65..100).days
             )
 
   5.times do
     project.rewards.create!(
       description: Faker::Superhero.power,
-      dollar_amount: rand(100),
+      dollar_amount: rand(1..100),
     )
   end
 end
@@ -58,6 +59,6 @@ end
   Pledge.create!(
     user: backer,
     project: project,
-    dollar_amount: project.rewards.sample.dollar_amount + rand(10)
+    dollar_amount: project.rewards.sample.dollar_amount + rand(1..10)
   )
 end
