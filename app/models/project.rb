@@ -8,7 +8,7 @@ class Project < ActiveRecord::Base
 
   validates :title, :description, :goal, :start_date, :end_date, :user_id, presence: true
   validates :goal, numericality: { only_float: true, greater_than: 0 }
-  validate :start_date_cannot_be_in_the_past
+  validate :start_date_cannot_be_in_the_past  #comment this code out before rails db:seed
   validate :end_date_cannot_be_before_start
 
 # def date_cannot_be_in_the_past

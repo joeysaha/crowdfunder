@@ -9,16 +9,27 @@
 <% @projects.each do |project| %>
   <%= project.title %> <br>
 <% end %>
-<h4>In Progress Projects</h4>
-<div class="">
-  Of all of your uploaded projects, these projects have already past the start date:
-  <br>
-</div>
+
+<h4>Live Projects</h4>
+<% in_progress_projects = [] %>
 <% @projects.each do |project| %>
   <% if project.start_date < DateTime.now %>
-    <%= project.title %> <br>
+    <%= in_progress_projects >> project.title %> <br>
   <% end %>
 <% end %>
+<% if in_progress_projects.length > 0 %>
+  <div class="">
+    <br>
+    Of all of your uploaded projects, these projects have already past the start date:
+    <br>
+  </div>
+  <% else %>
+    <p>You have no projects currently in progress.</p>
+<% end %>
+<% in_progress_projects.each do |projects| %>
+  <%= projects.title %>
+<% end %>
+
 <h4>Funded Projects</h4>
 <% fund = 0 %>
 <% goal_met = [] %>
@@ -31,8 +42,8 @@
     <% ind_proj_fund += pledge.dollar_amount %>
   <% end %>
   <% if ind_proj_fund >= project.goal %>
-    <% goal_met >> project.title %>
-    <p><%= project %> has been fully funded.</p>
+    <% goal_met << project.title %>
+    <p><%= project.title %> has been fully funded.</p>
   <% end %>
 <% end %>
 <div class="">
@@ -40,6 +51,7 @@
   This is how many pledges your projects have: <%= funded_projects %>.
 </div>
 <br>
+
 <h3>Pledges</h3>
 <hr>
 <p>You have <%=@pledges.count%> pledges on other people's projects.</p>
