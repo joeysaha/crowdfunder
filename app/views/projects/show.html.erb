@@ -5,6 +5,9 @@
 <% end %>
 
 <p><%= @project.description %></p>
+<p>Project Owner:
+  <%= "#{@project.user.first_name} #{@project.user.last_name}" %>
+</p>
 <p>Goal: <%= number_to_currency(@project.goal) %></p>
 <p>Fundraising starts: <%= @project.start_date.strftime("%A %b %d %Y") %></p>
 <p>Deadline: <%= @project.end_date.strftime("%A %b %d %Y") %></p>
