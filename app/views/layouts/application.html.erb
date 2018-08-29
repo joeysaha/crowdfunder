@@ -17,9 +17,10 @@
 
       <nav class="site-nav">
         <% if current_user %>
-          <%= link_to "Logout", :logout, method: :delete %>
+        <h4>Welcome, <%= current_user.first_name %>.</h4>
           <%= link_to "Profile", user_path(current_user.id) %>
-          <%= link_to "Main page", projects_url %>
+          <%= link_to "Main page", projects_url %> <br>
+          <%= link_to "Logout", :logout, method: :delete %>
         <% else %>
           <%= link_to "Register", new_user_path %> |
           <%= link_to "Login", :login %>

@@ -30,15 +30,15 @@ User.create(
 end
 
 10.times do
-  project = Project.create!(
+  project = Project.new(
               user: User.all.sample,
               title: Faker::App.name,
               description: Faker::Lorem.paragraph,
               goal: rand(100000),
-              start_date: Time.now.utc + rand(60).days,
-              end_date: Time.now.utc + rand(65..100).days
+              start_date: Time.now.utc + rand(-90..40).days,
+              end_date: Time.now.utc + rand(45..120).days
             )
-
+  project.save(validate: false)
   5.times do
     project.rewards.create!(
       description: Faker::Superhero.power,
@@ -56,9 +56,10 @@ end
     backer = User.all.sample
   end
 
-  Pledge.create!(
+  pledge = Pledge.new(
     user: backer,
     project: project,
     dollar_amount: project.rewards.sample.dollar_amount + rand(1..10)
   )
+  pledge.save(validate: false)
 end
