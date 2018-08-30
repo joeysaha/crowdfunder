@@ -59,7 +59,7 @@ end
   pledge = Pledge.new(
     user: backer,
     project: project,
-    dollar_amount: project.rewards.sample.dollar_amount + rand(1..10)
+    dollar_amount: project.rewards.sample.dollar_amount + rand(1..1000)
   )
   pledge.save(validate: false)
 end
