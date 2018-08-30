@@ -6,7 +6,7 @@
 
 <p><%= @project.description %></p>
 <p>Project Owner:
-  <%= "#{@project.user.first_name} #{@project.user.last_name}" %>
+  <%= link_to "#{@project.user.first_name} #{@project.user.last_name}", bio_path(@project.user.id) %>
 </p>
 <p>Goal: <%= number_to_currency(@project.goal) %></p>
 <p>Fundraising starts: <%= @project.start_date.strftime("%A %b %d %Y") %></p>

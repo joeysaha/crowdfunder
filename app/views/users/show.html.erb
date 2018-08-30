@@ -14,7 +14,7 @@
 <% in_progress_projects = [] %>
 <% @projects.each do |project| %>
   <% if project.start_date < DateTime.now %>
-    <%= in_progress_projects >> project.title %> <br>
+    <%= in_progress_projects << project.title %> <br>
   <% end %>
 <% end %>
 <% if in_progress_projects.length > 0 %>
@@ -27,7 +27,7 @@
     <p>You have no projects currently in progress.</p>
 <% end %>
 <% in_progress_projects.each do |projects| %>
-  <%= projects.title %>
+  <%= projects %>
 <% end %>
 
 <h4>Funded Projects</h4>
