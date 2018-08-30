@@ -13,7 +13,8 @@
       <h1 class="project-title"><%= project.title %></h1>
       <time class="project-days-left">
         <%= icon('clock-o') %>
-        <%= "#{time_ago_in_words(project.end_date)} #{( project.end_date > Time.now.utc ) ? 'remaining' : 'past deadline'}" %></time>
+        <%= "#{time_ago_in_words(project.end_date)} #{( project.end_date > Time.now.utc ) ? 'remaining' : 'past deadline'}" %>
+      </time>
     <% end %>
   </article>
 <% end %>

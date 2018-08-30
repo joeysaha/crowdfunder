@@ -11,6 +11,10 @@
 <p>Goal: <%= number_to_currency(@project.goal) %></p>
 <p>Fundraising starts: <%= @project.start_date.strftime("%A %b %d %Y") %></p>
 <p>Deadline: <%= @project.end_date.strftime("%A %b %d %Y") %></p>
+<time class="project-days-left">
+  <%= icon('clock-o') %>
+  <%= "#{time_ago_in_words(@project.end_date)} #{( @project.end_date > Time.now.utc ) ? 'remaining' : 'past deadline'}" %>
+</time>
 
 <h2>Pledges</h2>
 <%= form_for [@project, Pledge.new] do |f| %>
@@ -32,6 +36,13 @@
   <p>You have already pledged to this project.</p>
 <% end %>
 
+<hr><hr><hr>
+<p><%= Project.pledges_output(@project.pledges, current_user) %></p>
+<hr><hr><hr>
+
+
+
+
 <h2>Rewards</h2>
 <% @project.rewards.each do |reward| %>
   <p><%= number_to_currency(reward.dollar_amount) %></p>
@@ -49,5 +60,6 @@
 <% if current_user == @project.user %>
   <%= link_to "Add new reward", new_project_reward_path(@project) %>
 <% end %>
+
 
 <%= link_to "Back to Main page", projects_url %> <br>
