@@ -40,6 +40,7 @@
 <% fund = 0 %>
 <% goal_met = [] %>
 <% funded_projects = 0 %>
+<% project_has_funds = 0 %>
 <% @projects.each do |project| %>
   <% ind_proj_fund = 0 %>
   <% project.pledges.each do |pledge| %>
@@ -52,6 +53,17 @@
     <ul>
       <li>
         <p><b><%= project.title %> </b> has been fully funded.</p>
+        <p><%= number_to_currency(ind_proj_fund)%> is how much has been funded for this project. </p>
+      </li>
+    </ul>
+  <% end %>
+  <% if ind_proj_fund > 0 %>
+    <% project_has_funds += 1 %>
+  <% end %>
+  <% if project_has_funds > 0 && ind_proj_fund < project.goal %>
+    <ul>
+      <li>
+        <p><b><%= project.title %></b> has received funding. </p>
       </li>
     </ul>
   <% end %>
@@ -74,7 +86,7 @@
       <%= number_to_currency(pledge.dollar_amount) %> |
       <%= link_to "#{pledge.project.user.first_name} #{pledge.project.user.last_name}", bio_path(pledge.project.user.id) %>
     </li>
-  </ul>     
+  </ul>
 <% end %>
 
 <p>The amount of money you have pledged is <%= number_to_currency(pledge_amount) %></p>
