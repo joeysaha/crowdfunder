@@ -17,22 +17,42 @@ class Project < ActiveRecord::Base
 #   end
 # end
 
-def start_date_cannot_be_in_the_past
-  if self.start_date && self.start_date < DateTime.now
-    errors.add(:date, "invalid. Start date can't be in the past")
+  def start_date_cannot_be_in_the_past
+    if self.start_date && self.start_date < DateTime.now
+      errors.add(:date, "invalid. Start date can't be in the past")
+    end
   end
-end
 
-def end_date_cannot_be_before_start
-  if self.end_date && self.start_date && self.end_date < self.start_date
-    errors.add(:date, "invalid. End date can't be before the start date")
+  def end_date_cannot_be_before_start
+    if self.end_date && self.start_date && self.end_date < self.start_date
+      errors.add(:date, "invalid. End date can't be before the start date")
+    end
   end
-end
 
 # def end_date_cannot_be_before_start
 #   if end_date >= start_date
 #     errors
 #   end
 # end
+
+  def self.pledges_output(pledges_for_project, user)
+    total_pledge_money = 0
+    user_pledged = false
+    pledges_for_project.each do |proj|
+      puts proj
+      puts "#{(proj.dollar_amount)}"
+      puts proj.user.first_name
+      total_pledge_money += proj.dollar_amount
+      if proj.user == user
+        user_pledged = true
+      end
+    end
+    puts "The total money pledged to this project is #{(total_pledge_money)}."
+    if user_pledged == true
+      puts "You have already pledged to this project."
+    end
+  end
+
+
 
 end
