@@ -20,8 +20,8 @@
   <div class="">
     Of all of your uploaded projects, these project(s) have already past the start date:
   </div>
-  <% else %>
-    <p>You have no projects currently in progress.</p>
+<% else %>
+  <p>You have no projects currently in progress.</p>
 <% end %>
 <% current_user.projects.live_projects.each do |projects| %>
   <ul>
@@ -33,17 +33,18 @@
 
 
 
-
-
-
 <h4>Funded Projects</h4>
-<p>These projects have reached their funding goal</p>
-<% current_user.projects_where_goal_met.each do |proj_name, proj_fund| %>
-  <ul>
-    <li>
-      <b><%= proj_name %></b>: <%= number_to_currency(proj_fund) %>
-    </li>
-  </ul>
+<% if current_user.projects_where_goal_met.length > 0 %>
+  <p>These projects have reached their funding goal: </p>
+  <% current_user.projects_where_goal_met.each do |proj_name, proj_fund| %>
+    <ul>
+      <li>
+        <b><%= proj_name %></b>: <%= number_to_currency(proj_fund) %>
+      </li>
+    </ul>
+  <% end %>
+<% else %>
+  <p>You don't have any projects that have met their goal.</p>
 <% end %>
 
 <p>These projects have received funding.</p>
