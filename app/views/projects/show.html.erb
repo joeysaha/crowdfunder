@@ -21,24 +21,16 @@
   <%= f.number_field :dollar_amount, value: @project.rewards.minimum(:dollar_amount), step: 0.01 %>
   <%= f.submit "Pledge" %>
 <% end %>
-<% total_pledge_money = 0 %>
-<% user_pledged = false %>
 <% @project.pledges.each do |p| %>
   <p><%= number_to_currency(p.dollar_amount) %></p>
-  <p><%= p.user.first_name %></p>
-  <% total_pledge_money += p.dollar_amount %>
-  <% if p.user == current_user %>
-    <% user_pledged = true %>
-  <% end %>
+  <p><%= p.user.first_name %> <%= p.user.last_name%></p>
 <% end %>
-<p>The total money pledged to this project is <%= number_to_currency(total_pledge_money) %>.</p>
-<% if user_pledged == true %>
+<p>The total money pledged to this project is <%= number_to_currency(@project.pledges_total) %>.</p>
+<% if current_user.has_pledged?(@project) %>
   <p>You have already pledged to this project.</p>
 <% end %>
 
-<hr><hr><hr>
-<p><%= Project.pledges_output(@project.pledges, current_user) %></p>
-<hr><hr><hr>
+
 
 
 
