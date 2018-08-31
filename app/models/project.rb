@@ -29,29 +29,24 @@ class Project < ActiveRecord::Base
     end
   end
 
-# def end_date_cannot_be_before_start
-#   if end_date >= start_date
-#     errors
-#   end
-# end
-
-  def self.pledges_output(pledges_for_project, user)
+  def pledges_total
     total_pledge_money = 0
-    user_pledged = false
-    pledges_for_project.each do |proj|
-      puts proj
-      puts "#{(proj.dollar_amount)}"
-      puts proj.user.first_name
-      total_pledge_money += proj.dollar_amount
-      if proj.user == user
-        user_pledged = true
+    pledges.each do |proj_pledges|
+      total_pledge_money += proj_pledges.dollar_amount
+    end
+    return total_pledge_money
+  end
+
+  def pledge_same_user(project_pledges, currentuser)
+    pledges.each do |proj|
+      if proj.user == currentuser
+        return true
       end
     end
-    puts "The total money pledged to this project is #{(total_pledge_money)}."
-    if user_pledged == true
-      puts "You have already pledged to this project."
-    end
+    return false
   end
+
+  scope :live_projects, -> { where("start_date < ?", DateTime.now).order(:start_date) }
 
 
 

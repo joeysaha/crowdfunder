@@ -15,6 +15,7 @@
 <h3>Projects</h3>
 <hr>
 <h4>Uploaded Projects</h4>
+<p>Projects that have been uploaded by <%=@user.first_name%> are: </p>
 <% if @user.projects.length > 0 %>
   <% @user.projects.each do |project| %>
     <ul>
@@ -28,14 +29,9 @@
 <% end %>
 
 <h4>Active</h4>
-<% active_projects = [] %>
-<% @user.projects.each do |project| %>
-  <% if project.start_date < DateTime.now %>
-    <% active_projects << project.title %>
-  <% end %>
-<% end %>
-<% active_projects.each do |projects| %>
-  <% if active_projects.length > 0 %>
+<p>The projects that are currently active are: </p> 
+<% @user.total_active_projects.each do |projects| %>
+  <% if @user.total_active_projects.length > 0 %>
     <ul>
       <li>
         <p><%= projects %></p>
@@ -45,6 +41,8 @@
     <p><%= "#{@user.first_name}"%> has no currently active projects.</p>
     <% end %>
   <%end %>
+
+
 
 
 <h3>About <%= @user.first_name %></h3> <hr>

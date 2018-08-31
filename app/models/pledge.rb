@@ -26,4 +26,35 @@ class Pledge < ApplicationRecord
       errors.add(:user_id, "cannot pledge a project after the end date.")
     end
   end
+
+
+
+
+
+
+
+  def pledge_show(project_pledges)
+    pledges_hash = {}
+    project_pledges.each do |proj_pledges|
+      pledges_hash[proj_pledges.user.first_name] = proj_pledges.dollar_amount
+    end
+    return pledges_hash
+  end
+
+  def pledges_total(project_pledges)
+    total_pledge_money = 0
+    project_pledges.each do |proj_pledges|
+      total_pledge_money += proj_pledges.dollar_amount
+    end
+    return total_pledge_money
+  end
+
+  def pledge_same_user(project_pledges, currentuser)
+    project_pledges.each do |proj|
+      if proj.user == currentuser
+        return true
+      end
+    end
+    return false
+  end
 end
