@@ -14,7 +14,12 @@ class PledgeTest < ActiveSupport::TestCase
   end
 
   def test_a_pledge_cannot_be_created_without_dollar_amount
-    skip
+    pledge = Pledge.create(
+      project: new_project,
+      user: new_user
+    )
+    pledge.save
+    refute pledge.valid?
   end
 
   def test_owner_cannot_back_own_project
